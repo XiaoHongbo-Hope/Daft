@@ -102,6 +102,7 @@ async def start_udf_actors(
         }
     )
 
+    # Read from udf_options (not the params) because ray_options can override num_cpus / num_gpus via the spread above.
     cpus_per_actor = udf_options.get("num_cpus", 1.0)
     gpus_per_actor = udf_options.get("num_gpus", 0.0)
     alive_nodes = [n for n in ray.nodes() if n["Alive"]]
